@@ -7,26 +7,43 @@ test('Search for a book, add to cart, increase, decrease quantity and delete fro
 
   if (await rejectCookies.isVisible().catch(() => false)) {
     await rejectCookies.click();
-}
+  }
+
   //Search for Principezinho
-  await page.getByTestId('form-searchform-palavra').click();
-  await page.getByTestId('form-searchform-palavra').fill('Principezinho');
+  const search = page.getByTestId('form-searchform-palavra');
+  await expect(search).toBeVisible();
+  await expect(search).toBeEnabled();
+  await search.click();
+
+  await search.fill('Principezinho');
+
   //Select O Principezinho
-  await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
-  await page.getByTestId('item-auto-complete-0').getByRole('link').filter({ hasText: 'O Principezinho' }).click();
+  const firstSuggestion = page.getByTestId('item-auto-complete-0');
+  await expect(firstSuggestion).toBeVisible({ timeout: 5000 });
+
+  await Promise.all([
+    page.waitForLoadState('domcontentloaded'),
+    firstSuggestion.getByRole('link').filter({ hasText: 'O Principezinho' }).click()
+  ]);
+
   //Add to cart
-  await page.getByTestId('productPageRightSectionTop-actions-addCart-btn').click();
+  const addToCart = page.getByTestId('productPageRightSectionTop-actions-addCart-btn');
+  await expect(addToCart).toBeVisible();
+  await addToCart.click();
+
   //Check the cart
   await page.getByTestId('cart-button').click();
   const product = page.getByTestId('product-line-0').getByText('O Principezinho'); 
   await expect(product).toBeVisible({ timeout: 10000 });
+
   //Add and subtract
   await page.getByRole('button', { name: '+' }).click();
   await expect(page.getByTitle('quantidade')).toHaveValue('2');
+
   await page.getByRole('button', { name: '–' }).click();
   await expect(page.getByTitle('quantidade')).toHaveValue('1');
+
   //Remove from cart
   await page.locator(".icon-trash").click();
   await expect(page.getByText('O cesto de compras está vazio.')).toBeVisible();
-
 });

@@ -13,6 +13,7 @@ test.describe("Scenario 1", () => {
     test("Scenario 1", async ({page}) => {
         //Using the searchbox and clicking the first result
         await page.getByRole("textbox", { name: 'texto para pesquisa' }).fill('1984');
+        await page.waitForTimeout(300);
         await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
         await page.getByTestId("item-auto-complete-0").click();
         //Asserting the book's details
@@ -37,6 +38,7 @@ test.describe("Scenario 1", () => {
     test("Scenario 2", async ({page}) => {
         //Using the searchbox and clicking the first result
         await page.getByRole("textbox", { name: 'texto para pesquisa' }).fill('1984');
+        await page.waitForTimeout(300);
         await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
         await page.getByTestId("item-auto-complete-0").click();
         //Asserting the book's author
