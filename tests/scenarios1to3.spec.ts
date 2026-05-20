@@ -2,7 +2,7 @@ import {test, expect} from "@playwright/test"
 
 test.describe("Scenario 1", () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto("https://www.bertrand.pt/");
+        await page.goto('https://www.bertrand.pt/', { waitUntil: 'domcontentloaded' });
         const rejectCookies = page.locator('.gpe-cookies-reject');
 
         if (await rejectCookies.isVisible().catch(() => false)) {

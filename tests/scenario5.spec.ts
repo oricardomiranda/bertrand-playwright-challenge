@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('Search for a book and validate the author page', async ({ page }) => {
   //Go to website and reject cookies
-  await page.goto('https://www.bertrand.pt/');
+  await page.goto('https://www.bertrand.pt/', { waitUntil: 'domcontentloaded' });
   const rejectCookies = page.locator('.gpe-cookies-reject');
 
   if (await rejectCookies.isVisible().catch(() => false)) {
