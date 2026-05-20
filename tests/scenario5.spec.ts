@@ -12,7 +12,7 @@ test('Search for a book and validate the author page', async ({ page }) => {
   await page.getByTestId('form-searchform-palavra').click();
   await page.getByTestId('form-searchform-palavra').fill('Principezinho');
   //Select O Principezinho
-  await expect(page.getByText('TÍTULOS SUGERIDOS')).toBeVisible();
+  await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
   await page.getByTestId('item-auto-complete-0').getByRole('link').filter({ hasText: 'O Principezinho' }).click();
   //Assert author name
   await expect(page.getByTestId('productPageSectionAboutAuthor-content-title')).toHaveText('Antoine de Saint-Exupéry');

@@ -13,7 +13,7 @@ test.describe("Scenario 1", () => {
     test("Scenario 1", async ({page}) => {
         //Using the searchbox and clicking the first result
         await page.getByRole("textbox", { name: 'texto para pesquisa' }).fill('1984');
-        await expect(page.getByText("TÍTULOS SUGERIDOS")).toBeVisible();
+        await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
         await page.getByTestId("item-auto-complete-0").click();
         //Asserting the book's details
         await test.step("book author", async () => {
@@ -37,7 +37,7 @@ test.describe("Scenario 1", () => {
     test("Scenario 2", async ({page}) => {
         //Using the searchbox and clicking the first result
         await page.getByRole("textbox", { name: 'texto para pesquisa' }).fill('1984');
-        await expect(page.getByText("TÍTULOS SUGERIDOS")).toBeVisible();
+        await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
         await page.getByTestId("item-auto-complete-0").click();
         //Asserting the book's author
         let author1 = "";
@@ -58,7 +58,7 @@ test.describe("Scenario 1", () => {
     test("Scenario 3", async ({page}) => {
         //Using the searchbox and clicking the first result
         await page.getByRole("textbox", { name: 'texto para pesquisa' }).fill('Do Not Disturb');
-        await expect(page.getByText("TÍTULOS SUGERIDOS")).toBeVisible();
+        await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
         await page.getByTestId("item-auto-complete-0").click();
         //Asserting the book's author
         await test.step("book author", async () => {

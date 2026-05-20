@@ -12,7 +12,7 @@ test('Search for a book, add to cart, increase, decrease quantity and delete fro
   await page.getByTestId('form-searchform-palavra').click();
   await page.getByTestId('form-searchform-palavra').fill('Principezinho');
   //Select O Principezinho
-  await expect(page.getByText('TÍTULOS SUGERIDOS')).toBeVisible();
+  await expect(page.getByTestId("item-auto-complete-0")).toBeVisible();
   await page.getByTestId('item-auto-complete-0').getByRole('link').filter({ hasText: 'O Principezinho' }).click();
   //Add to cart
   await page.getByTestId('productPageRightSectionTop-actions-addCart-btn').click();
