@@ -3,8 +3,11 @@ import {test, expect} from "@playwright/test"
 test.describe("Scenario 1", () => {
     test.beforeEach(async ({ page }) => {
         await page.goto("https://www.bertrand.pt/");
-        await page.locator(".gpe-cookies-reject").click();
+        const rejectCookies = page.locator('.gpe-cookies-reject');
 
+        if (await rejectCookies.isVisible().catch(() => false)) {
+            await rejectCookies.click();
+}
     });
 
     test("Scenario 1", async ({page}) => {

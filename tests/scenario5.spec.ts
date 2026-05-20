@@ -3,7 +3,11 @@ import { test, expect } from '@playwright/test';
 test('Search for a book and validate the author page', async ({ page }) => {
   //Go to website and reject cookies
   await page.goto('https://www.bertrand.pt/');
-  await page.getByRole('button', { name: 'Rejeitar' }).click();
+  const rejectCookies = page.locator('.gpe-cookies-reject');
+
+  if (await rejectCookies.isVisible().catch(() => false)) {
+    await rejectCookies.click();
+}
   //Search for Principezinho
   await page.getByTestId('form-searchform-palavra').click();
   await page.getByTestId('form-searchform-palavra').fill('Principezinho');
