@@ -68,7 +68,7 @@ test.describe("Scenario 1", () => {
         await test.step("book idiom and flag", async () => {
             await expect(page.getByTestId("productPageRightSectionTop-language")).toHaveText("idioma: Inglês");
             await expect(page.getByTestId("productPageRightSectionTop-languageFlag")).toHaveClass("icon language-flag Inglês");
-            await page.screenshot({ path: 'flag.png' });
+            await page.screenshot({ path: 'tests/screenshots/flag.png' });
         });
     });
 });
